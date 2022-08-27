@@ -15,13 +15,13 @@ Project Page: [https://sourceforge.net/projects/astyle/](https://sourceforge.net
 
 1. 下载Astyle，解压到任意位置（Astyle为绿色软件，无需安装）
 
-![AStyle_2.02.1_windows.zip](https://note.youdao.com/yws/public/resource/15909f20655397a9e2beb64403f41e45/12AFB017E290410EBAFD9449EB25AF83)
+![AStyle_2.02.1_windows.zip](https://media.canheting.cn//img/202208271516779.png)
 
-![img](https://note.youdao.com/yws/public/resource/15909f20655397a9e2beb64403f41e45/BACFAE738C0D4B5EB1A950A0EA4E345C)
+![img](https://media.canheting.cn/img/202208271109569.png)
 
 1. keil µVision5中单击Tools菜单---Customize Tools Menu
 
-   ![](https://note.youdao.com/yws/public/resource/15909f20655397a9e2beb64403f41e45/9582923B342143FB8ACB3722C47C42AB)
+   ![](https://media.canheting.cn/img/202208271110267.png)
 
 2. 添加Astyle All Files 和Astyle Current File菜单(自定义菜单名，可以随便起名)这里添加了两个菜单，分别是格式化当前文件和格式化project中的所有文件Command命令：在刚才解压的位置选择Astyle.exe。
 
@@ -30,14 +30,14 @@ Project Page: [https://sourceforge.net/projects/astyle/](https://sourceforge.net
    Astyle Current File菜单填写 `!E`
 
    Astyle All Files菜单填写 `"$E*.c" "$E*.h"`
-![img](https://note.youdao.com/yws/public/resource/15909f20655397a9e2beb64403f41e45/10358AF584A14E4B9C56BF8C0145DA57)
+![img](https://media.canheting.cn//img/202208271517883.png)
 
-![img](https://note.youdao.com/yws/public/resource/15909f20655397a9e2beb64403f41e45/32094915EF604CE18E6B68E0CDAC1F11)![img](https://note.youdao.com/yws/public/resource/15909f20655397a9e2beb64403f41e45/B3E57A456EBD48C5A974259CBA15615B)
+![img](https://media.canheting.cn//img/202208271517752.png)![img](https://media.canheting.cn//img/202208271518100.png)
 
 ------
 
 使用方式如下：
 
-![img](https://note.youdao.com/yws/public/resource/15909f20655397a9e2beb64403f41e45/5A52496B528E4CF4B49C242B8E74799F)
+![img](https://media.canheting.cn//img/202208271519616.png)
 
 使用效果很不错，代码瞬间变得整齐了。

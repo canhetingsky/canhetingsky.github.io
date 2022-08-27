@@ -11,9 +11,9 @@ cover: /img/Valine-Admin.jpg
 ## 快速部署
 
 - 在 [Leancloud](https://leancloud.cn/dashboard/#/apps) 云引擎设置界面，填写代码库并保存：<https://github.com/DesertsP/Valine-Admin.git>
-![设置仓库](https://cdn.jsdelivr.net/gh/canhetingsky/media@master/img/1586763962331.jpg)
+![设置仓库](https://media.canheting.cn/img/1586763962331.jpg)
 - 在设置页面，设置环境变量以及 Web 二级域名。
-![环境变量](https://cdn.jsdelivr.net/gh/canhetingsky/media@master/img/1586764335298.jpg)
+![环境变量](https://media.canheting.cn/img/1586764335298.jpg)
 
 | 变量             | 示例                                      | 说明                                                         |
 | ---------------- | ----------------------------------------- | ------------------------------------------------------------ |
@@ -31,16 +31,16 @@ cover: /img/Valine-Admin.jpg
 **以上必填参数请务必正确设置。**
 
 - 二级域名用于评论后台管理，如[https://deserts.leanapp.cn](https://deserts.leanapp.cn/) 。
-![二级域名](https://cdn.jsdelivr.net/gh/canhetingsky/media@master/img/1586764344136.jpg)
+![二级域名](https://media.canheting.cn/img/1586764344136.jpg)
 
 - 切换到部署标签页，分支使用master，点击部署即可
-![一键部署](https://cdn.jsdelivr.net/gh/canhetingsky/media@master/img/1586764501029.jpg)
+![一键部署](https://media.canheting.cn/img/1586764501029.jpg)
 
 - 第一次部署需要花点时间。
-![部署过程](https://cdn.jsdelivr.net/gh/canhetingsky/media@master/img/1586764523793.jpg)
+![部署过程](https://media.canheting.cn/img/1586764523793.jpg)
 
 - 评论管理。访问设置的二级域名`https://二级域名.leanapp.cn/sign-up`，注册管理员登录信息，如：<https://deserts.leanapp.cn/sign-up>
- ![管理员注册](https://cdn.jsdelivr.net/gh/canhetingsky/media@master/img/1586764674233.jpg)
+ ![管理员注册](https://media.canheting.cn/img/1586764674233.jpg)
 
 > 注：使用原版Valine如果遇到注册页面不显示直接跳转至登录页的情况，请手动删除_User表中的全部数据。
 
@@ -55,10 +55,10 @@ cover: /img/Valine-Admin.jpg
 进入云引擎-定时任务中，创建定时器，创建两个定时任务。
 
 选择self-wake云函数，Cron表达式为`0 0/30 7-23 * * ?`，表示每天早6点到晚23点每隔30分钟访问云引擎，`ADMIN_URL`环境变量务必设置正确：
-![](https://cdn.jsdelivr.net/gh/canhetingsky/media@master/img/1586764761081.jpg)
+![](https://media.canheting.cn/img/1586764761081.jpg)
 
 选择resend-mails云函数，Cron表达式为`0 0 8 * * ?`，表示每天早8点检查过去24小时内漏发的通知邮件并补发：
-![通知检查](https://cdn.jsdelivr.net/gh/canhetingsky/media@master/img/1586764769756.jpg)
+![通知检查](https://media.canheting.cn/img/1586764769756.jpg)
 
 **添加定时器后记得点击启动方可生效。**
 
