@@ -1,8 +1,13 @@
 ---
 title: 使用EasyX制作一个颜色画板
-date: 2020-04-14 19:47:10
-tags: [C++,EasyX,编程,图形库]
+tags:
+  - C++
+  - EasyX
+  - 编程
+  - 图形库
 categories: 编程
+abbrlink: f70cd762
+date: 2020-04-14 19:47:10
 ---
 
 EasyX 是针对C++的图形库，可以帮助C语言初学者快速上手图形和游戏编程。  

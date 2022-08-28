@@ -1,10 +1,13 @@
 ---
 title: 在keil中使用Astyle格式化代码
+tags:
+  - Astyle
+  - Keil
+categories:
+  - 嵌入式开发
+  - 工具
+abbrlink: d0d5c401
 date: 2020-04-14 19:56:12
-tags: [Astyle, Keil]
-categories: 
-- 嵌入式开发
-- 工具
 ---
 
 ​    Astyle 的全称是Artistic Style的简称，是一个开源的源代码格式化工具，可以对C，C++，C#以及[Java](https://lib.csdn.net/base/javase)等编程语言的源代码进行缩进、格式化、美化。

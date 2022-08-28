@@ -1,9 +1,12 @@
 ---
 title: 在Gridea中添加Valine评论系统
-date: 2020-04-12 17:50:15
-tags: [Gridea,Valine]
+tags:
+  - Gridea
+  - Valine
 categories: 网站开发
 cover: /img/use-valine-in-gridea.jpg
+abbrlink: aa0a7d5f
+date: 2020-04-12 17:50:15
 ---
 
 Valine - 一款快速、简洁且高效的无后端评论系统。

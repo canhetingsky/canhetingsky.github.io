@@ -1,9 +1,11 @@
 ---
 title: Hello Gridea
-date: 2018-12-12 10:00:00
-tags: [Gridea]
+tags:
+  - Gridea
 categories: 网站开发
 cover: /img/hello-gridea.jpg
+abbrlink: 6143bcfc
+date: 2018-12-12 10:00:00
 ---
 
 👏  欢迎使用 **Gridea** ！  

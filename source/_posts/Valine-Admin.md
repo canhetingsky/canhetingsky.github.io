@@ -1,9 +1,13 @@
 ---
 title: Valine-Admin后台搭建
-date: 2020-04-14 18:33:41
-tags: [Valine,Valine-Admin,网站开发]
+tags:
+  - Valine
+  - Valine-Admin
+  - 网站开发
 categories: 网站开发
 cover: /img/Valine-Admin.jpg
+abbrlink: 3c98a028
+date: 2020-04-14 18:33:41
 ---
 > [Valine Admin](https://github.com/DesertsP/Valine-Admin) 是 Valine 评论系统的扩展和增强，主要实现评论邮件通知、评论管理、垃圾评论过滤等功能。
 <!-- more -->
