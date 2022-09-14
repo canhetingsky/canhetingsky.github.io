@@ -18,7 +18,7 @@ sticky: 1
 
 ![image-20220904161239766](https://media.canheting.cn//img/202209041612057.png)
 
-> 本文翻译自：[Recommended C style and coding rules green](https://github.com/MaJerle/c-code-style)
+> 本文翻译自：[Recommended C style and coding rules](https://github.com/MaJerle/c-code-style)
 
 {% tabs c-code-style %}
 <!-- tab 中文 -->
