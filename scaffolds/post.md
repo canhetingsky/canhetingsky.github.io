@@ -2,8 +2,13 @@
 title: {{ title }}
 date: {{ date }}
 tags:
-updated:
+  - tag1
+  - tag2
 categories:
+  - 父
+  - 子
+
+updated:
 keywords:
 description:
 top_img:
