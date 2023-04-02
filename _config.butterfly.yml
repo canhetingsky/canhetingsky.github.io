@@ -417,7 +417,7 @@ footer:
   owner:
     enable: true
     since: 2020
-  custom_text: <a href="https://beian.miit.gov.cn/"><span>备案号：京ICP备2022012118号-1</span></a><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011502005665"><img class="icp-icon" src="https://www.beian.gov.cn/img/ghs.png"><span>京公网安备 11011502005665号</span></a>
+  custom_text: <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral">本网站由<img class="icp-icon" src="https://media.canheting.cn/img/upyun.png">提供CDN加速/云存储服务</a><br><a href="https://beian.miit.gov.cn/"><img class="icp-icon" src="https://media.canheting.cn/img/icp.svg">京ICP备2022012118号</a><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011502005665"><img class="icp-icon" src="https://media.canheting.cn/img/police.svg">京公网安备11011502005665号</a>
   copyright: true # Copyright of theme and framework
 
 # Analysis

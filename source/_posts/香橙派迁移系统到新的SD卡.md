@@ -122,7 +122,7 @@ tmpfs           769M   60K  769M   1% /run/user/0
 
 以下是扩容的步骤：
 
-```
+```sh
 root@orangepi5:~# sudo fdisk /dev/mmcblk1
 
 Welcome to fdisk (util-linux 2.37.2).
