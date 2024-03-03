@@ -1,0 +1,294 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C语言柔性数组 | canhetingsky | Blog</title><meta name="author" content="canhetingsky"><meta name="copyright" content="canhetingsky"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="结构中最后一个元素允许是未知大小的数组，这个数组就是柔性数组。  结构中的柔性数组前面必须至少一个其他成员，柔性数组成员允许结构中包含一个大小可变的数组，sizeof返回的这种结构大小不包括柔性数组的内存。包含柔数组成员的结构用malloc函数进行内存的动态分配，且分配的内存应该大于结构的大小以适应柔性数组的预期大小。柔性数组到底如何使用？ 不完整类型C和C++对于不完整类型的定义是一样的，不完">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言柔性数组">
+<meta property="og:url" content="http://blog.canheting.cn/posts/5c4a1bb8/index.html">
+<meta property="og:site_name" content="canhetingsky | Blog">
+<meta property="og:description" content="结构中最后一个元素允许是未知大小的数组，这个数组就是柔性数组。  结构中的柔性数组前面必须至少一个其他成员，柔性数组成员允许结构中包含一个大小可变的数组，sizeof返回的这种结构大小不包括柔性数组的内存。包含柔数组成员的结构用malloc函数进行内存的动态分配，且分配的内存应该大于结构的大小以适应柔性数组的预期大小。柔性数组到底如何使用？ 不完整类型C和C++对于不完整类型的定义是一样的，不完">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://media.canheting.cn/img/bg1.jpg">
+<meta property="article:published_time" content="2022-09-14T22:18:24.000Z">
+<meta property="article:modified_time" content="2024-03-03T06:33:50.400Z">
+<meta property="article:author" content="canhetingsky">
+<meta property="article:tag" content="C语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://media.canheting.cn/img/bg1.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.canheting.cn/posts/5c4a1bb8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="Z-_zDvw63fygrSK5mAFeTkqT0bf6YMrXzb9Nq3EXSaM"/><meta name="baidu-site-verification" content="code-JnrWbf0qp1"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b1efa8f1cc8143d0e2e2343f830da633";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: canhetingsky","link":"链接: ","source":"来源: canhetingsky | Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C语言柔性数组',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-03 06:33:50'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/user.css"><meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="canhetingsky | Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://media.canheting.cn/img/bg1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="canhetingsky | Blog"><span class="site-name">canhetingsky | Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C语言柔性数组</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-14T22:18:24.000Z" title="发表于 2022-09-14 22:18:24">2022-09-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-03T06:33:50.400Z" title="更新于 2024-03-03 06:33:50">2024-03-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title="C语言柔性数组"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span class="waline-pageview-count" data-path="/posts/5c4a1bb8/"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>结构中最后一个元素允许是未知大小的数组，这个数组就是<code>柔性数组</code>。</p>
+</blockquote>
+<p>结构中的柔性数组前面必须至少一个其他成员，柔性数组成员允许结构中包含一个大小可变的数组，<code>sizeof</code>返回的这种结构大小不包括柔性数组的内存。包含柔数组成员的结构用<code>malloc</code>函数进行内存的动态分配，且分配的内存应该大于结构的大小以适应柔性数组的预期大小。柔性数组到底如何使用？</p>
+<h2 id="不完整类型"><a href="#不完整类型" class="headerlink" title="不完整类型"></a>不完整类型</h2><p>C和C++对于不完整类型的定义是一样的，不完整类型是这样一种类型，它缺乏足够的信息（例如长度）去描述一个完整的对象。</p>
+<p>不完整类型举例：</p>
+<p>前向声明就是一种常用的不完整类型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span>;</span> <span class="comment">//test 只给出了声明，没有给出定义</span></span><br></pre></td></tr></table></figure>
+
+<p>不完整数据类型必须通过某种方式补充完整，才能使它们进行实例化，否则只能用于定义指针或引用，因为此时实例化的是指针或引用本身，不是base和test对象</p>
+<p>一个未知长度的数组也属于不完整类型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> a[];</span><br></pre></td></tr></table></figure>
+
+<p>extern关键字不能去掉，因为数组的长度未知，不能作为定义出现。不完整类型的数组需要补充完整才能使用。不完整类型的数组可以通过几种方式补充完整，大括号形式的初始化就是其中的一种方式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[] = &#123;<span class="number">10</span>, <span class="number">20</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><p>首先，我们需要知道，所谓变量，其实是内存地址的一个抽像名字罢了。在静态编译的程序中，所有的变量名都会在编译时被转成内存地址。机器是不知道我们取的名字的，只知道地址。</p>
+<p>所以就有了<strong>栈内存区</strong>、<strong>堆内存区</strong>、<strong>静态内存区</strong>、<strong>常量内存区</strong>，我们代码中的所有变量都会被编译器预先放到这些内存区中。</p>
+<p>有了上面这个基础，我们来看一下结构体中的成员的地址是什么？我们先简单化一下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">char</span> *p;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，test结构中i和p指针，在C的编译器中保存的是相对地址，也就是说，它们的地址是相对于<code>struct test</code>的实例的。如果我们有这样的代码：<br>下面做个实验：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">char</span> *p;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">test</span> <span class="title">t</span>;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, &amp;t);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, &amp;(t.i));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, &amp;(t.p));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note info modern"><p>格式控制符<code>%p</code>中的p是pointer（指针）的缩写。<code>printf</code>函数中<code>%p</code>是打印地址（指针地址）的，是十六进制的形式，但是会全部打完，即有多少位打印多少位，附加前缀0x。</p>
+</div>
+
+<p>运行结果:</p>
+<p><img src="https://media.canheting.cn/img/202209142354670.png"></p>
+<p>我们可以看到，<code>t.i</code>的地址和<code>t</code>的地址是一样的，<code>t.p</code>的址址相对于t的地址多了个8。说白了，<code>t.i</code>其实就是<code>(&amp;t + 1*0)</code>,<code>t.p</code>的其实就是<code>(&amp;t + 1*8)</code>。<code>1*0</code>和<code>1*8</code>这个偏移地址就是成员<code>i</code>和<code>p</code>在编译时就被编译器给hard code了的地址。于是，你就知道，不管结构体的实例是什么——访问其成员其实就是加成员的偏移量。</p>
+<p>下面再来做个实验：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">short</span> c;</span><br><span class="line">    <span class="type">char</span> *p;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">test</span> *<span class="title">pt</span>=</span><span class="literal">NULL</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, &amp;(pt-&gt;i));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, &amp;(pt-&gt;c));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, &amp;(pt-&gt;p));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果:</p>
+<p><img src="https://media.canheting.cn/img/202209142354827.png"></p>
+<p>注意：上面的<code>pt-&gt;p</code>的偏移之所以是<code>0*8</code>而不是<code>0*6</code>，是因为内存对齐了（我在64位系统上）。关于内存对齐，可参看《C语言内存对齐详解》一文。</p>
+<h2 id="柔性数组"><a href="#柔性数组" class="headerlink" title="柔性数组"></a>柔性数组</h2><p>柔性数组成员（flexible array member）也叫伸缩性数组成员，这种代码结构产生于对动态结构体的需求。在日常的编程中，有时候需要在结构体中存放一个长度动态的字符串，一般的做法，是在结构体中定义一个指针成员，这个指针成员指向该字符串所在的动态内存空间，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s_test</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">double</span> b;</span><br><span class="line">    <span class="type">char</span>* p;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>p指向字符串，这种方法造成字符串与结构体是分离的，不利于操作。把字符串和结构体连在一起的话，效果会更好，可以修改如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> a[] = <span class="string">&quot;Hello world&quot;</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s_test</span> *<span class="title">ptest</span> =</span> (<span class="keyword">struct</span> s_test*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(s_test)+streln(a)+<span class="number">1</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(ptest+<span class="number">1</span>,a);</span><br></pre></td></tr></table></figure>
+
+<p>这样一来，<code>(char*)(ptestt + 1)</code>就是字符串“hello world”的地址。这时候p成了多余的东西，可以去掉。但是，又产生了另外一个问题：老是使用<code>(char*)(ptestt + 1)</code>不方便。如果能够找出一种方法，既能直接引用该字符串，又不占用结构体的空间，就完美了，符合这种条件的代码结构应该是一个非对象的符号地址，在结构体的尾部放置一个0长度的数组是一个绝妙的解决方案。不过，C&#x2F;C++标准规定不能定义长度为0的数组，因此，有些编译器就把0长度的数组成员作为自己的非标准扩展，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s_test2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">double</span> b;</span><br><span class="line">    <span class="type">char</span> c[<span class="number">0</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>c就叫柔性数组成员，如果把ptest指向的动态分配内存看作一个整体，c就是一个长度可以动态变化的结构体成员，柔性一词来源于此。c的长度为0，因此它不占用test的空间，同时<code>ptest-&gt;c</code>就是“hello world”的首地址，不需要再使用<code>(char*)(ptestt + 1)</code>这么丑陋的语法了。</p>
+<p>鉴于这种代码结构所产生的重要作用，C99 甚至把它收入了标准中：</p>
+<blockquote>
+<p>As a special case, the last element of a structure with more than one named member may have an incomplete array type; this is called a flexible array member.</p>
+</blockquote>
+<p>C99使用不完整类型实现柔性数组成员，标准形式是这样的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s_test</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="type">int</span> a;</span><br><span class="line">  <span class="type">double</span> b;</span><br><span class="line">  <span class="type">char</span> c[];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>c同样不占用test的空间，只作为一个符号地址存在，而且必须是结构体的最后一个成员。柔性数组成员不仅可以用于字符数组，还可以是元素为其它类型的数组，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s_test</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">double</span> b;</span><br><span class="line">    <span class="type">float</span>[];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>首先，我们要知道，0长度的数组在ISO C 和C++的规格说明书中是不允许的。这也就是为什么在VC++2012下编译你会得到一个警告：“arning C4200: 使用了非标准扩展:结构&#x2F;联合中的零大小数组”。</p>
+<p>那么为什么gcc可以通过而连一个警告都没有？那是因为gcc为了预先支持C99的这种玩法，所以，让<code>零长度数组</code>这种玩法合法了。关于GCC对于这个事的文档在这里：“Arrays of Length Zero”，文档中给了一个例子，完整代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">line</span> &#123;</span></span><br><span class="line">   <span class="type">int</span> length;</span><br><span class="line">   <span class="type">char</span> contents[<span class="number">0</span>]; <span class="comment">// C99的玩法是：char contents[]; 没有指定数组长度</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> this_length=<span class="number">10</span>;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">line</span> *<span class="title">thisline</span> =</span> (<span class="keyword">struct</span> line *)</span><br><span class="line">                     <span class="built_in">malloc</span> (<span class="keyword">sizeof</span> (<span class="keyword">struct</span> line) + this_length);</span><br><span class="line">    thisline-&gt;length = this_length;</span><br><span class="line">    <span class="built_in">memset</span>(thisline-&gt;contents, <span class="string">&#x27;a&#x27;</span>, this_length);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这段代码的意思是：我想分配一个不定长的数组，于是我有一个结构体，其中有两个成员，一个是length，代表数组的长度，一个是contents，代码数组的内容。后面代码里的this_length（长度是10）代表是想分配的数据的长度。</p>
+<h3 id="实例代码"><a href="#实例代码" class="headerlink" title="实例代码"></a>实例代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;malloc.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">line</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="type">char</span>* content;</span><br><span class="line">&#125;line;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">line2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">&#125;line2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">line3</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="type">char</span> content[<span class="number">0</span>];</span><br><span class="line">&#125;line3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">line4</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="type">char</span> content[];</span><br><span class="line">&#125;line4;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span>* <span class="title function_">test1</span><span class="params">(<span class="type">char</span>* v,<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    line* p_str = (line*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(line) + n);</span><br><span class="line">    p_str-&gt;len = n;</span><br><span class="line"></span><br><span class="line">    p_str-&gt;content = <span class="built_in">memcpy</span>((<span class="type">char</span>*)(p_str + <span class="number">1</span>), v, n);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ret = %s\n&quot;</span>, v);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;test1 str=%s\n&quot;</span>, p_str-&gt;content);</span><br><span class="line">    <span class="built_in">free</span>(p_str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span>* <span class="title function_">test2</span><span class="params">(<span class="type">char</span>* v,<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    line2* p_str = (line2*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(line2) + n);</span><br><span class="line">    p_str-&gt;len = n;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memcpy</span>((<span class="type">char</span>*)(p_str + <span class="number">1</span>), v, n);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ret = %s\n&quot;</span>, v);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;test2 str=%s\n&quot;</span>, (<span class="type">char</span>*)(p_str+<span class="number">1</span>));</span><br><span class="line">    <span class="built_in">free</span>(p_str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span>* <span class="title function_">test3</span><span class="params">(<span class="type">char</span>* v,<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    line3* p_str = (line3*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(line3) + n);</span><br><span class="line">    p_str-&gt;len = n;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memcpy</span>((<span class="type">char</span>*)(p_str + <span class="number">1</span>), v, n);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ret = %s\n&quot;</span>, v);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;test3 str=%s\n&quot;</span>, p_str-&gt;content);</span><br><span class="line">    <span class="built_in">free</span>(p_str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span>* <span class="title function_">test4</span><span class="params">(<span class="type">char</span>* v,<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    line4* p_str = (line4*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(line4) + n);</span><br><span class="line">    p_str-&gt;len = n;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memcpy</span>((<span class="type">char</span>*)(p_str + <span class="number">1</span>), v, n);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ret = %s\n&quot;</span>, v);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;test4 str=%s\n&quot;</span>, p_str-&gt;content);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(p_str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">char</span> v[<span class="number">16</span>] = <span class="string">&quot;Hello world!&quot;</span>;</span><br><span class="line"></span><br><span class="line">    test1(v,<span class="number">16</span>);</span><br><span class="line">    test2(v,<span class="number">16</span>);</span><br><span class="line">    test3(v,<span class="number">16</span>);</span><br><span class="line">    test4(v,<span class="number">16</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用柔性数组的好处"><a href="#使用柔性数组的好处" class="headerlink" title="使用柔性数组的好处"></a>使用柔性数组的好处</h3><p>在进行Linux内核开发或者嵌入式开发时，经常会遇到结构体的最后出现char data[], char data[0], char data[1]，这样的代码，这就是柔性数组的实现。柔性数组也并没有定义柔性数组，只是所支持的不完整类型产生了柔性数组这样神奇的结构。</p>
+<ul>
+<li>不需要初始化，数组名直接就是所在的偏移</li>
+<li>不占任何空间，指针需要占用int长度空间，空数组不占任何空间。（注意，char data[1]；这种形式是占用一个单位的空间的）</li>
+<li>空间一次分配，防止内存泄漏</li>
+<li>分配连续的内存，减少内存碎片化。（因为指针所分配的空间不是连续的，而数组占用连续的空间）</li>
+</ul>
+<h3 id="使用柔性数组需要注意的"><a href="#使用柔性数组需要注意的" class="headerlink" title="使用柔性数组需要注意的"></a>使用柔性数组需要注意的</h3><ul>
+<li>必须是结构体的最后一个成员</li>
+<li>柔性数组之上，需要有其他的成员（结构体中不能只有一个柔性数组）</li>
+<li>sizefo返回的结构体的大小不包括柔性数组的内存（如果是char data[1]就会有一个单位的空间）</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/canhetingsky">canhetingsky</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://blog.canheting.cn/posts/5c4a1bb8/">http://blog.canheting.cn/posts/5c4a1bb8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.canheting.cn" target="_blank">canhetingsky | Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C%E8%AF%AD%E8%A8%80/">C语言</a></div><div class="post_share"><div class="social-share" data-image="https://media.canheting.cn/img/bg1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/pay-wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/pay-wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/pay-alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/pay-alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/5da28d89/" title="ESP32系列教程之SmartConfig智能配网"><img class="cover" src="https://media.canheting.cn/img/bg5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">ESP32系列教程之SmartConfig智能配网</div></div></a></div><div class="next-post pull-right"><a href="/posts/ee876dcb/" title="GitHub上一个高star的嵌入式C编码规范"><img class="cover" src="https://media.canheting.cn//img/202209041705963.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">GitHub上一个高star的嵌入式C编码规范</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/ee876dcb/" title="GitHub上一个高star的嵌入式C编码规范"><img class="cover" src="https://media.canheting.cn//img/202209041705963.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-04</div><div class="title">GitHub上一个高star的嵌入式C编码规范</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">canhetingsky</div><div class="author-info__description">嵌入式开发工程师，喜欢折腾一些新奇的东西</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/canhetingsky"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/canhetingsky" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:canheting@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email '#4a7dbe'"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%AE%8C%E6%95%B4%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">不完整类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">2.</span> <span class="toc-text">结构体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%94%E6%80%A7%E6%95%B0%E7%BB%84"><span class="toc-number">3.</span> <span class="toc-text">柔性数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">3.1.</span> <span class="toc-text">实例代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%9F%94%E6%80%A7%E6%95%B0%E7%BB%84%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-number">3.2.</span> <span class="toc-text">使用柔性数组的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%9F%94%E6%80%A7%E6%95%B0%E7%BB%84%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84"><span class="toc-number">3.3.</span> <span class="toc-text">使用柔性数组需要注意的</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/d0d5c401/" title="在keil中使用Astyle格式化代码"><img src="https://media.canheting.cn/img/bg9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在keil中使用Astyle格式化代码"/></a><div class="content"><a class="title" href="/posts/d0d5c401/" title="在keil中使用Astyle格式化代码">在keil中使用Astyle格式化代码</a><time datetime="2024-03-03T06:33:50.400Z" title="发表于 2024-03-03 06:33:50">2024-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/b133e156/" title="Windows任务计划程序如何定时执行Python程序"><img src="https://media.canheting.cn/img/bg8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows任务计划程序如何定时执行Python程序"/></a><div class="content"><a class="title" href="/posts/b133e156/" title="Windows任务计划程序如何定时执行Python程序">Windows任务计划程序如何定时执行Python程序</a><time datetime="2023-04-02T14:36:35.000Z" title="发表于 2023-04-02 14:36:35">2023-04-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7a51f279/" title="香橙派迁移系统到新的SD卡"><img src="https://media.canheting.cn/img/bg9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="香橙派迁移系统到新的SD卡"/></a><div class="content"><a class="title" href="/posts/7a51f279/" title="香橙派迁移系统到新的SD卡">香橙派迁移系统到新的SD卡</a><time datetime="2023-02-26T17:20:22.000Z" title="发表于 2023-02-26 17:20:22">2023-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3687fa6b/" title="教你1秒使用ChatGPT中文版无需账号"><img src="https://media.canheting.cn/img/bg0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="教你1秒使用ChatGPT中文版无需账号"/></a><div class="content"><a class="title" href="/posts/3687fa6b/" title="教你1秒使用ChatGPT中文版无需账号">教你1秒使用ChatGPT中文版无需账号</a><time datetime="2023-02-19T15:57:26.000Z" title="发表于 2023-02-19 15:57:26">2023-02-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/104912e1/" title="飞书机器人搭建教程"><img src="https://media.canheting.cn/img/bg5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="飞书机器人搭建教程"/></a><div class="content"><a class="title" href="/posts/104912e1/" title="飞书机器人搭建教程">飞书机器人搭建教程</a><time datetime="2023-02-19T15:56:51.000Z" title="发表于 2023-02-19 15:56:51">2023-02-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By canhetingsky</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral">本网站由<img class="icp-icon" src="https://media.canheting.cn/img/upyun.png">提供CDN加速/云存储服务</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://beian.miit.gov.cn/"><img class="icp-icon" src="https://media.canheting.cn/img/icp.svg">京ICP备2022012118号</a><a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011502005665"><img class="icp-icon" src="https://media.canheting.cn/img/police.svg">京公网安备11011502005665号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+
+  const initWaline = (Fn) => {
+    const waline = Fn(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.canheting.cn/',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+  }
+
+  const loadWaline = async () => {
+    if (initFn) initWaline(initFn)
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.1.2/dist/waline.min.css')
+      const { init } = await import('https://cdn.jsdelivr.net/npm/@waline/client@3.1.2/dist/waline.min.js')
+      initFn = init || Waline.init
+      initWaline(initFn)
+      window.walineFn = initFn
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
