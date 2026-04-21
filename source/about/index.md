@@ -8,7 +8,7 @@ type: "about"
 
 ## 🏠 关于本站
 
-本网站使用 [Hexo](https://hexo.io/) 驱动，主题  [Fluid](https://github.com/jerryc127/hexo-theme-butterfly)。
+本网站使用 [Hexo](https://hexo.io/) 驱动，主题  [Butterfly](https://github.com/jerryc127/hexo-theme-butterfly)。
 
 ## 👨‍💻 博主是谁
 
