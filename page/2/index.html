@@ -1,0 +1,301 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>canhetingsky | Blog - canhetingsky的个人博客</title><meta name="author" content="canhetingsky"><meta name="copyright" content="canhetingsky"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="canhetingsky | Blog">
+<meta property="og:url" content="http://blog.canheting.cn/page/2/index.html">
+<meta property="og:site_name" content="canhetingsky | Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.canheting.cn/img/avatar.png">
+<meta property="article:author" content="canhetingsky">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.canheting.cn/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.canheting.cn/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="Z-_zDvw63fygrSK5mAFeTkqT0bf6YMrXzb9Nq3EXSaM"/><meta name="baidu-site-verification" content="code-JnrWbf0qp1"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b1efa8f1cc8143d0e2e2343f830da633";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: canhetingsky","link":"链接: ","source":"来源: canhetingsky | Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'canhetingsky | Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><link rel="stylesheet" href="/css/user.css"><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="canhetingsky | Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/blog-bg.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">canhetingsky | Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">canhetingsky | Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/canhetingsky" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:canheting@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email '#4a7dbe'"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/posts/5c4a1bb8/" title="C语言柔性数组"><img class="post-bg" src="https://media.canheting.cn/img/bg6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C语言柔性数组"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/5c4a1bb8/" title="C语言柔性数组">C语言柔性数组</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-14T22:18:24.000Z" title="发表于 2022-09-14 22:18:24">2022-09-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="content"> 结构中最后一个元素允许是未知大小的数组，这个数组就是柔性数组。  结构中的柔性数组前面必须至少一个其他成员，柔性数组成员允许结构中包含一个大小可变的数组，sizeof返回的这种结构大小不包括柔性数组的内存。包含柔数组成员的结构用malloc函数进行内存的动态分配，且分配的内存应该大于结构的大小以适应柔性数组的预期大小。柔性数组到底如何使用？ 不完整类型C和C++对于不完整类型的定义是一样的，不完整类型是这样一种类型，它缺乏足够的信息（例如长度）去描述一个完整的对象。 不完整类型举例： 前向声明就是一种常用的不完整类型 1struct test; //test 只给出了声明，没有给出定义  不完整数据类型必须通过某种方式补充完整，才能使它们进行实例化，否则只能用于定义指针或引用，因为此时实例化的是指针或引用本身，不是base和test对象 一个未知长度的数组也属于不完整类型： 1extern int a[];  extern关键字不能去掉，因为数组的长度未知，不能作为定义出现。不完整类型的数组需要补充完整才能使用。不完整类型的数组可以通过几种方式补充完整，大括号形式的初始化就是其...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/posts/a1751c09/" title="Hello Hexo"><img class="post-bg" src="https://media.canheting.cn/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello Hexo"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/a1751c09/" title="Hello Hexo">Hello Hexo</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-05-01T18:27:07.000Z" title="发表于 2022-05-01 18:27:07">2022-05-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/">网站开发</a></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment </div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/posts/d0d5c401/" title="在keil中使用Astyle格式化代码"><img class="post-bg" src="https://media.canheting.cn/img/bg4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在keil中使用Astyle格式化代码"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/d0d5c401/" title="在keil中使用Astyle格式化代码">在keil中使用Astyle格式化代码</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-04-14T19:56:12.000Z" title="发表于 2020-04-14 19:56:12">2020-04-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/">嵌入式开发</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/%E5%B7%A5%E5%85%B7/">工具</a></span></div><div class="content">Astyle是什么Astyle的全称是Artistic Style，它是一个开源的源代码格式化工具，可以对C，C++，C#以及Java等编程语言的源代码进行缩进、格式化、美化。Home Page: https://astyle.sourceforge.net/Project Page: https://sourceforge.net/projects/astyle/ 如何在Keil中使用Astyle神器在Keil μVision中集成Astyle（以下Keil μVison5为例），可以将凌乱的代码变得整齐起来，方便阅读。 Keil中配置Astyle 下载Astyle，解压到任意位置（Astyle为绿色软件，无需安装）     keil µVision5中单击Tools菜单—Customize Tools Menu   添加Astyle All Files 和Astyle Current File菜单(自定义菜单名，可以随便起名)这里添加了两个菜单，分别是格式化当前文件和格式化project中的所有文件Command命令：在刚才解压的位置选择Astyle.exe。 Argumen...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/posts/f7c7e1dd/" title="蓝桥杯单片机设计与开发"><img class="post-bg" src="https://media.canheting.cn/img/bg8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蓝桥杯单片机设计与开发"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/f7c7e1dd/" title="蓝桥杯单片机设计与开发">蓝桥杯单片机设计与开发</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-04-14T19:51:48.000Z" title="发表于 2020-04-14 19:51:48">2020-04-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/">嵌入式开发</a></span></div><div class="content">蓝桥杯单片机设计与开发实验例程   常用模块 LED 按键 数码管 DS18B20 定时器    备注 亮状态控制 独立按键&#x2F;矩阵按键 动态显示数据 根据提供的驱动，编写初始化及读取温度函数即可 辅助，但必会      1.LED闪烁实验   实验效果：LED以0.2S为间隔闪烁  1234567891011121314151617181920212223242526272829#include &quot;reg52.h&quot; void delay(void)	//延时函数&#123;	unsigned char i,j,k;	for(i=0; i&lt;20; i++)    &#123;        for(j=0; j&lt;20; j++)        &#123;            for(k=0; k&lt;248; k++);        &#125;    &#125; &#125;void main(void)&#123;    while(1)    &#123;        P2 = ((P2&amp;0x1f)|0x80); ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/posts/f70cd762/" title="使用EasyX制作一个颜色画板"><img class="post-bg" src="https://media.canheting.cn/img/bg2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用EasyX制作一个颜色画板"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/f70cd762/" title="使用EasyX制作一个颜色画板">使用EasyX制作一个颜色画板</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-04-14T19:47:10.000Z" title="发表于 2020-04-14 19:47:10">2020-04-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="content">EasyX 是针对C++的图形库，可以帮助C语言初学者快速上手图形和游戏编程。   比如，可以用 VC + EasyX 很快的用几何图形画一个房子，或者一辆移动的小车，可以编写俄罗斯方块、贪吃蛇、黑白棋等小游戏，可以练习图形学的各种算法，等等。总之，这是一个很强大的图形库。   通过此库设计了一个颜色画板！  代码如下：    123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899// ***********************************************************************// Assembly         :// Author           : qin// Created          : 0...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/posts/3c98a028/" title="Valine-Admin后台搭建"><img class="post-bg" src="/img/Valine-Admin.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Valine-Admin后台搭建"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/3c98a028/" title="Valine-Admin后台搭建">Valine-Admin后台搭建</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-04-14T18:33:41.000Z" title="发表于 2020-04-14 18:33:41">2020-04-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/">网站开发</a></span></div><div class="content"> Valine Admin 是 Valine 评论系统的扩展和增强，主要实现评论邮件通知、评论管理、垃圾评论过滤等功能。   Valine Admin 支持完全自定义的邮件通知模板。基于 Akismet API 实现准确的垃圾评论过滤。此外，使用云函数等技术解决了免费版云引擎休眠问题，支持云引擎自动唤醒，漏发邮件自动补发。兼容云淡风轻及Deserts维护的多版本Valine。 快速部署 在 Leancloud 云引擎设置界面，填写代码库并保存：https://github.com/DesertsP/Valine-Admin.git 在设置页面，设置环境变量以及 Web 二级域名。     变量 示例 说明    SITE_NAME Deserts [必填]博客名称   SITE_URL https://deserts.io [必填]首页地址   SMTP_SERVICE QQ [新版支持]邮件服务提供商，支持 QQ、163、126、Gmail 以及 更多   SMTP_USER xxxxxx@qq.com [必填]SMTP登录用户   SMTP_PASS ccxxxxxxxxch...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/posts/aa0a7d5f/" title="在Gridea中添加Valine评论系统"><img class="post-bg" src="/img/use-valine-in-gridea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在Gridea中添加Valine评论系统"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/aa0a7d5f/" title="在Gridea中添加Valine评论系统">在Gridea中添加Valine评论系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-04-12T17:50:15.000Z" title="发表于 2020-04-12 17:50:15">2020-04-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/">网站开发</a></span></div><div class="content">Valine - 一款快速、简洁且高效的无后端评论系统。  Gridea 提供了两个评论系统，Gitalk 和 Disqus。Gitalk 需要使用 Github 账号登录，对于没Github 账号的人来说不太方便，Disqus 目前在国内不可用。对比了可用于静态博客的国内评论系统，最终选用了 Valine。 Valine 特性👇 快速 安全 Emoji 😉 无后端实现 MarkDown 全语法支持 轻量易用(~15kb gzipped) 文章阅读量统计 v1.2.0+  快速上手 Valine获取 APPID 和 APPKeyValine 是基于 LeanCloud 开发的，所以需要注册账号来使用。首先登录或注册 LeanCloud, 然后进入控制台后点击左下角创建应用：  进入刚刚创建的应用，选择左下角的设置&gt;应用 Keys，然后就能看到你的 APPID 和 APPKey 了： 在网页中插入 Valine确认你是用的是哪个模板（我使用的是 Notes），然后在 Gridea theme 文件夹中找到相应的模板，并在 head.ejs 中引入 1&lt;script ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/posts/6143bcfc/" title="Hello Gridea"><img class="post-bg" src="/img/hello-gridea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello Gridea"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/6143bcfc/" title="Hello Gridea">Hello Gridea</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-12-12T10:00:00.000Z" title="发表于 2018-12-12 10:00:00">2018-12-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/">网站开发</a></span></div><div class="content">👏  欢迎使用 Gridea ！✍️  Gridea 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意… …   GithubGridea 主页示例网站 特性👇📝  你可以使用最酷的 Markdown 语法，进行快速创作   🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片   🏷️  你可以对文章进行标签分组   📋  你可以自定义菜单，甚至可以创建外部链接菜单   💻  你可以在 Windows，MacOS 或 Linux 设备上使用此客户端   🌎  你可以使用 𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌 或 Coding Pages 向世界展示，未来将支持更多平台   💬  你可以进行简单的配置，接入 Gitalk 或 DisqusJS 评论系统   🇬🇧  你可以使用中文简体或英语   🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力   🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步   🌱 当然 Gridea 还很年...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">canhetingsky</div><div class="author-info-description">嵌入式开发工程师，喜欢折腾一些新奇的东西</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/canhetingsky"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/canhetingsky" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:canheting@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email '#4a7dbe'"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/c3f8a1b2/" title="大学生体测评分标准（附评分表）｜体测成绩怎么算？多少分及格"><img src="https://media.canheting.cn/img/bg8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大学生体测评分标准（附评分表）｜体测成绩怎么算？多少分及格"/></a><div class="content"><a class="title" href="/posts/c3f8a1b2/" title="大学生体测评分标准（附评分表）｜体测成绩怎么算？多少分及格">大学生体测评分标准（附评分表）｜体测成绩怎么算？多少分及格</a><time datetime="2026-04-21T12:00:00.000Z" title="发表于 2026-04-21 12:00:00">2026-04-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/f1fdc5c5/" title="一键升级npm依赖包到最新版本教程"><img src="https://media.canheting.cn/img/bg6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一键升级npm依赖包到最新版本教程"/></a><div class="content"><a class="title" href="/posts/f1fdc5c5/" title="一键升级npm依赖包到最新版本教程">一键升级npm依赖包到最新版本教程</a><time datetime="2023-05-30T23:32:37.000Z" title="发表于 2023-05-30 23:32:37">2023-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/b133e156/" title="Windows任务计划程序如何定时执行Python程序"><img src="https://media.canheting.cn/img/bg5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows任务计划程序如何定时执行Python程序"/></a><div class="content"><a class="title" href="/posts/b133e156/" title="Windows任务计划程序如何定时执行Python程序">Windows任务计划程序如何定时执行Python程序</a><time datetime="2023-04-02T14:36:35.000Z" title="发表于 2023-04-02 14:36:35">2023-04-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7a51f279/" title="香橙派迁移系统到新的SD卡"><img src="https://media.canheting.cn/img/bg7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="香橙派迁移系统到新的SD卡"/></a><div class="content"><a class="title" href="/posts/7a51f279/" title="香橙派迁移系统到新的SD卡">香橙派迁移系统到新的SD卡</a><time datetime="2023-02-26T17:20:22.000Z" title="发表于 2023-02-26 17:20:22">2023-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3687fa6b/" title="教你1秒使用ChatGPT中文版无需账号"><img src="https://media.canheting.cn/img/bg4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="教你1秒使用ChatGPT中文版无需账号"/></a><div class="content"><a class="title" href="/posts/3687fa6b/" title="教你1秒使用ChatGPT中文版无需账号">教你1秒使用ChatGPT中文版无需账号</a><time datetime="2023-02-19T15:57:26.000Z" title="发表于 2023-02-19 15:57:26">2023-02-19</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"><span class="card-category-list-name">嵌入式开发</span><span class="card-category-list-count">4</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/%E5%B7%A5%E5%85%B7/"><span class="card-category-list-name">工具</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/"><span class="card-category-list-name">技术</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">教程</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/"><span class="card-category-list-name">生活</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="card-category-list-name">编程</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/"><span class="card-category-list-name">网站开发</span><span class="card-category-list-count">4</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E4%BD%93%E8%B4%A8%E6%B5%8B%E8%AF%95/" style="font-size: 1.1em; color: #999">体质测试</a> <a href="/tags/Valine/" style="font-size: 1.5em; color: #99a9bf">Valine</a> <a href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" style="font-size: 1.1em; color: #999">网站开发</a> <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 1.1em; color: #999">单片机</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/%E8%AF%84%E5%88%86%E6%A0%87%E5%87%86/" style="font-size: 1.1em; color: #999">评分标准</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.1em; color: #999">教程</a> <a href="/tags/SmartConfig/" style="font-size: 1.1em; color: #999">SmartConfig</a> <a href="/tags/ESP32/" style="font-size: 1.5em; color: #99a9bf">ESP32</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 1.1em; color: #999">编程</a> <a href="/tags/npm/" style="font-size: 1.1em; color: #999">npm</a> <a href="/tags/Gridea/" style="font-size: 1.5em; color: #99a9bf">Gridea</a> <a href="/tags/EasyX/" style="font-size: 1.1em; color: #999">EasyX</a> <a href="/tags/ChatGPT/" style="font-size: 1.1em; color: #999">ChatGPT</a> <a href="/tags/%E9%A6%99%E6%A9%99%E6%B4%BE/" style="font-size: 1.1em; color: #999">香橙派</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/" style="font-size: 1.1em; color: #999">编程规范</a> <a href="/tags/python/" style="font-size: 1.5em; color: #99a9bf">python</a> <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E7%A8%8B%E5%BA%8F/" style="font-size: 1.1em; color: #999">任务计划程序</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 1.1em; color: #999">蓝桥杯</a> <a href="/tags/%E5%A4%A7%E5%AD%A6%E7%94%9F/" style="font-size: 1.1em; color: #999">大学生</a> <a href="/tags/%E5%9B%BE%E5%BD%A2%E5%BA%93/" style="font-size: 1.1em; color: #999">图形库</a> <a href="/tags/%E9%A3%9E%E4%B9%A6%E6%9C%BA%E5%99%A8%E4%BA%BA/" style="font-size: 1.1em; color: #999">飞书机器人</a> <a href="/tags/Keil/" style="font-size: 1.1em; color: #999">Keil</a> <a href="/tags/Valine-Admin/" style="font-size: 1.1em; color: #999">Valine-Admin</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 1.5em; color: #99a9bf">C语言</a> <a href="/tags/Astyle/" style="font-size: 1.1em; color: #999">Astyle</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98/" style="font-size: 1.1em; color: #999">阿里云盘</a> <a href="/tags/%E4%BD%93%E6%B5%8B/" style="font-size: 1.1em; color: #999">体测</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">前端</a> <a href="/tags/C/" style="font-size: 1.1em; color: #999">C++</a> <a href="/tags/OTA/" style="font-size: 1.1em; color: #999">OTA</a> <a href="/tags/Windows/" style="font-size: 1.1em; color: #999">Windows</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/04/">
+            <span class="card-archive-list-date">
+              四月 2026
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2023/05/">
+            <span class="card-archive-list-date">
+              五月 2023
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2023/04/">
+            <span class="card-archive-list-date">
+              四月 2023
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2023/02/">
+            <span class="card-archive-list-date">
+              二月 2023
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2022/10/">
+            <span class="card-archive-list-date">
+              十月 2022
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2022/09/">
+            <span class="card-archive-list-date">
+              九月 2022
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2022/05/">
+            <span class="card-archive-list-date">
+              五月 2022
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2020/04/">
+            <span class="card-archive-list-date">
+              四月 2020
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">18</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">25.8k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-05-11T13:04:30.288Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2020 - 2026 By canhetingsky</span></div><div class="footer_custom_text"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral">本网站由<img class="icp-icon" src="https://media.canheting.cn/img/upyun.png">提供CDN加速/云存储服务</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://beian.miit.gov.cn/"><img class="icp-icon" src="https://media.canheting.cn/img/icp.svg">京ICP备2022012118号</a><a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011502005665"><img class="icp-icon" src="https://media.canheting.cn/img/police.svg">京公网安备11011502005665号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@3.0.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = [].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      const from = '出自 ' + data.from
+      typedJSFn.processSubtitle(data.hitokoto, [from])
+    })
+    .catch(err => {
+      console.error('Failed to get the Hitokoto API:', err)
+      typedJSFn.processSubtitle([])
+    })
+}
+typedJSFn.run(subtitleType)
+</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>在Gridea中添加Valine评论系统 | canhetingsky | Blog</title><meta name="author" content="canhetingsky"><meta name="copyright" content="canhetingsky"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Valine - 一款快速、简洁且高效的无后端评论系统。  Gridea 提供了两个评论系统，Gitalk 和 Disqus。Gitalk 需要使用 Github 账号登录，对于没Github 账号的人来说不太方便，Disqus 目前在国内不可用。对比了可用于静态博客的国内评论系统，最终选用了 Valine。 Valine 特性👇 快速 安全 Emoji 😉 无后端实现 MarkDown 全语">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Gridea中添加Valine评论系统">
+<meta property="og:url" content="http://blog.canheting.cn/posts/aa0a7d5f/index.html">
+<meta property="og:site_name" content="canhetingsky | Blog">
+<meta property="og:description" content="Valine - 一款快速、简洁且高效的无后端评论系统。  Gridea 提供了两个评论系统，Gitalk 和 Disqus。Gitalk 需要使用 Github 账号登录，对于没Github 账号的人来说不太方便，Disqus 目前在国内不可用。对比了可用于静态博客的国内评论系统，最终选用了 Valine。 Valine 特性👇 快速 安全 Emoji 😉 无后端实现 MarkDown 全语">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.canheting.cn/img/use-valine-in-gridea.jpg">
+<meta property="article:published_time" content="2020-04-12T17:50:15.000Z">
+<meta property="article:modified_time" content="2026-05-11T13:04:01.145Z">
+<meta property="article:author" content="canhetingsky">
+<meta property="article:tag" content="Gridea">
+<meta property="article:tag" content="Valine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.canheting.cn/img/use-valine-in-gridea.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "在Gridea中添加Valine评论系统",
+  "url": "http://blog.canheting.cn/posts/aa0a7d5f/",
+  "image": "http://blog.canheting.cn/img/use-valine-in-gridea.jpg",
+  "datePublished": "2020-04-12T17:50:15.000Z",
+  "dateModified": "2026-05-11T13:04:01.145Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "canhetingsky",
+      "url": "https://github.com/canhetingsky"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.canheting.cn/posts/aa0a7d5f/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="Z-_zDvw63fygrSK5mAFeTkqT0bf6YMrXzb9Nq3EXSaM"/><meta name="baidu-site-verification" content="code-JnrWbf0qp1"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b1efa8f1cc8143d0e2e2343f830da633";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: canhetingsky","link":"链接: ","source":"来源: canhetingsky | Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '在Gridea中添加Valine评论系统',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/user.css"><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="canhetingsky | Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/use-valine-in-gridea.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">canhetingsky | Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">在Gridea中添加Valine评论系统</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">在Gridea中添加Valine评论系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-12T17:50:15.000Z" title="发表于 2020-04-12 17:50:15">2020-04-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-11T13:04:01.145Z" title="更新于 2026-05-11 13:04:01">2026-05-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/">网站开发</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">472</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="waline-pageview-count" data-path="/posts/aa0a7d5f/"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>Valine - 一款快速、简洁且高效的无后端评论系统。</p>
+<p> Gridea 提供了两个评论系统，Gitalk 和 Disqus。Gitalk 需要使用 Github 账号登录，对于没Github 账号的人来说不太方便，Disqus 目前在国内不可用。对比了可用于静态博客的国内评论系统，最终选用了 Valine。</p>
+<h2 id="Valine-特性👇"><a href="#Valine-特性👇" class="headerlink" title="Valine 特性👇"></a>Valine 特性👇</h2><ul>
+<li>快速</li>
+<li>安全</li>
+<li>Emoji 😉</li>
+<li>无后端实现</li>
+<li>MarkDown 全语法支持</li>
+<li>轻量易用(~15kb gzipped)</li>
+<li>文章阅读量统计 v1.2.0+</li>
+</ul>
+<h2 id="快速上手-Valine"><a href="#快速上手-Valine" class="headerlink" title="快速上手 Valine"></a>快速上手 Valine</h2><h3 id="获取-APPID-和-APPKey"><a href="#获取-APPID-和-APPKey" class="headerlink" title="获取 APPID 和 APPKey"></a>获取 <strong>APPID</strong> 和 <strong>APPKey</strong></h3><p>Valine 是基于 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.leancloud.cn/">LeanCloud</a> 开发的，所以需要注册账号来使用。首先登录或注册 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.leancloud.cn/">LeanCloud</a>, 然后进入控制台后点击左下角创建应用：</p>
+<p><img src="https://media.canheting.cn/img/1586595020015.jpg"></p>
+<p>进入刚刚创建的应用，选择左下角的设置&gt;应用 Keys，然后就能看到你的 <strong>APPID</strong> 和 <strong>APPKey</strong> 了：<br><img src="https://media.canheting.cn/img/1586595106836.jpg"></p>
+<h3 id="在网页中插入-Valine"><a href="#在网页中插入-Valine" class="headerlink" title="在网页中插入 Valine"></a>在网页中插入 Valine</h3><p>确认你是用的是哪个模板（我使用的是 Notes），然后在 Gridea theme 文件夹中找到相应的模板，并在 <code>head.ejs</code> 中引入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&#x27;//unpkg.com/valine/dist/Valine.min.js&#x27;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://media.canheting.cn/img/1586595765846.jpg"><br>在文章下面添加 Valine 的评论框，在 <code>post.ejs</code> 中插入以下代码。修改初始化对象中的 <strong>appId</strong> 和 <strong>appKey</strong> 的值为上面刚刚获取到的值即可。更多信息请查看<a target="_blank" rel="noopener external nofollow noreferrer" href="https://valine.js.org/configuration.html">配置项</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;vcomments&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">new</span> <span class="title class_">Valine</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">el</span>: <span class="string">&#x27;#vcomments&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">appId</span>: <span class="string">&#x27;&lt;API_ID&gt;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">appKey</span>: <span class="string">&#x27;&lt;API_Key&gt;&#x27;</span></span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://media.canheting.cn/img/1586596027242.jpg"><br><img src="https://media.canheting.cn/img/1586596324924.jpg"><br>打开文章详情页，显示评论框就成功了。<br><img src="https://media.canheting.cn/img/1586596974577.jpg"><br>评论可以在  <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.leancloud.cn/">LeanCloud</a> 的后台进行管理。<br><img src="https://media.canheting.cn/img/1586596674976.jpg"><br>但这样管理并不理想，下一部分，使用 Valine-Admin 来对评论进行管理。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/DesertsP/Valine-Admin">Valine Admin</a>  是 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://deserts.io/diy-a-comment-system/">Valine 评论系统</a>的扩展和增强，主要实现评论邮件通知、评论管理、垃圾评论过滤等功能。支持完全自定义的邮件通知模板。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/canhetingsky">canhetingsky</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://blog.canheting.cn/posts/aa0a7d5f/">http://blog.canheting.cn/posts/aa0a7d5f/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://blog.canheting.cn" target="_blank">canhetingsky | Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Valine/">Valine</a><a class="post-meta__tags" href="/tags/Gridea/">Gridea</a></div><div class="post-share"><div class="social-share" data-image="/img/use-valine-in-gridea.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/pay-wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/pay-wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/pay-alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/pay-alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/3c98a028/" title="Valine-Admin后台搭建"><img class="cover" src="/img/Valine-Admin.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Valine-Admin后台搭建</div></div><div class="info-2"><div class="info-item-1"> Valine Admin 是 Valine 评论系统的扩展和增强，主要实现评论邮件通知、评论管理、垃圾评论过滤等功能。   Valine Admin 支持完全自定义的邮件通知模板。基于 Akismet API 实现准确的垃圾评论过滤。此外，使用云函数等技术解决了免费版云引擎休眠问题，支持云引擎自动唤醒，漏发邮件自动补发。兼容云淡风轻及Deserts维护的多版本Valine。 快速部署 在 Leancloud 云引擎设置界面，填写代码库并保存：https://github.com/DesertsP/Valine-Admin.git 在设置页面，设置环境变量以及 Web 二级域名。     变量 示例 说明    SITE_NAME Deserts [必填]博客名称   SITE_URL https://deserts.io [必填]首页地址   SMTP_SERVICE QQ [新版支持]邮件服务提供商，支持 QQ、163、126、Gmail 以及 更多   SMTP_USER xxxxxx@qq.com [必填]SMTP登录用户   SMTP_PASS ccxxxxxxxxch...</div></div></div></a><a class="pagination-related" href="/posts/6143bcfc/" title="Hello Gridea"><img class="cover" src="/img/hello-gridea.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Hello Gridea</div></div><div class="info-2"><div class="info-item-1">👏  欢迎使用 Gridea ！✍️  Gridea 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意… …   GithubGridea 主页示例网站 特性👇📝  你可以使用最酷的 Markdown 语法，进行快速创作   🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片   🏷️  你可以对文章进行标签分组   📋  你可以自定义菜单，甚至可以创建外部链接菜单   💻  你可以在 Windows，MacOS 或 Linux 设备上使用此客户端   🌎  你可以使用 𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌 或 Coding Pages 向世界展示，未来将支持更多平台   💬  你可以进行简单的配置，接入 Gitalk 或 DisqusJS 评论系统   🇬🇧  你可以使用中文简体或英语   🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力   🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步   🌱 当然 Gridea 还很年...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/6143bcfc/" title="Hello Gridea"><img class="cover" src="/img/hello-gridea.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-12-12</div><div class="info-item-2">Hello Gridea</div></div><div class="info-2"><div class="info-item-1">👏  欢迎使用 Gridea ！✍️  Gridea 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意… …   GithubGridea 主页示例网站 特性👇📝  你可以使用最酷的 Markdown 语法，进行快速创作   🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片   🏷️  你可以对文章进行标签分组   📋  你可以自定义菜单，甚至可以创建外部链接菜单   💻  你可以在 Windows，MacOS 或 Linux 设备上使用此客户端   🌎  你可以使用 𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌 或 Coding Pages 向世界展示，未来将支持更多平台   💬  你可以进行简单的配置，接入 Gitalk 或 DisqusJS 评论系统   🇬🇧  你可以使用中文简体或英语   🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力   🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步   🌱 当然 Gridea 还很年...</div></div></div></a><a class="pagination-related" href="/posts/3c98a028/" title="Valine-Admin后台搭建"><img class="cover" src="/img/Valine-Admin.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-14</div><div class="info-item-2">Valine-Admin后台搭建</div></div><div class="info-2"><div class="info-item-1"> Valine Admin 是 Valine 评论系统的扩展和增强，主要实现评论邮件通知、评论管理、垃圾评论过滤等功能。   Valine Admin 支持完全自定义的邮件通知模板。基于 Akismet API 实现准确的垃圾评论过滤。此外，使用云函数等技术解决了免费版云引擎休眠问题，支持云引擎自动唤醒，漏发邮件自动补发。兼容云淡风轻及Deserts维护的多版本Valine。 快速部署 在 Leancloud 云引擎设置界面，填写代码库并保存：https://github.com/DesertsP/Valine-Admin.git 在设置页面，设置环境变量以及 Web 二级域名。     变量 示例 说明    SITE_NAME Deserts [必填]博客名称   SITE_URL https://deserts.io [必填]首页地址   SMTP_SERVICE QQ [新版支持]邮件服务提供商，支持 QQ、163、126、Gmail 以及 更多   SMTP_USER xxxxxx@qq.com [必填]SMTP登录用户   SMTP_PASS ccxxxxxxxxch...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">canhetingsky</div><div class="author-info-description">嵌入式开发工程师，喜欢折腾一些新奇的东西</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/canhetingsky"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/canhetingsky" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:canheting@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email '#4a7dbe'"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Valine-%E7%89%B9%E6%80%A7%F0%9F%91%87"><span class="toc-number">1.</span> <span class="toc-text">Valine 特性👇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B-Valine"><span class="toc-number">2.</span> <span class="toc-text">快速上手 Valine</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96-APPID-%E5%92%8C-APPKey"><span class="toc-number">2.1.</span> <span class="toc-text">获取 APPID 和 APPKey</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%BD%91%E9%A1%B5%E4%B8%AD%E6%8F%92%E5%85%A5-Valine"><span class="toc-number">2.2.</span> <span class="toc-text">在网页中插入 Valine</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/c3f8a1b2/" title="大学生体测评分标准（附评分表）｜体测成绩怎么算？多少分及格"><img src="https://media.canheting.cn/img/bg8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大学生体测评分标准（附评分表）｜体测成绩怎么算？多少分及格"/></a><div class="content"><a class="title" href="/posts/c3f8a1b2/" title="大学生体测评分标准（附评分表）｜体测成绩怎么算？多少分及格">大学生体测评分标准（附评分表）｜体测成绩怎么算？多少分及格</a><time datetime="2026-04-21T12:00:00.000Z" title="发表于 2026-04-21 12:00:00">2026-04-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/f1fdc5c5/" title="一键升级npm依赖包到最新版本教程"><img src="https://media.canheting.cn/img/bg6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一键升级npm依赖包到最新版本教程"/></a><div class="content"><a class="title" href="/posts/f1fdc5c5/" title="一键升级npm依赖包到最新版本教程">一键升级npm依赖包到最新版本教程</a><time datetime="2023-05-30T23:32:37.000Z" title="发表于 2023-05-30 23:32:37">2023-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/b133e156/" title="Windows任务计划程序如何定时执行Python程序"><img src="https://media.canheting.cn/img/bg5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows任务计划程序如何定时执行Python程序"/></a><div class="content"><a class="title" href="/posts/b133e156/" title="Windows任务计划程序如何定时执行Python程序">Windows任务计划程序如何定时执行Python程序</a><time datetime="2023-04-02T14:36:35.000Z" title="发表于 2023-04-02 14:36:35">2023-04-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7a51f279/" title="香橙派迁移系统到新的SD卡"><img src="https://media.canheting.cn/img/bg7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="香橙派迁移系统到新的SD卡"/></a><div class="content"><a class="title" href="/posts/7a51f279/" title="香橙派迁移系统到新的SD卡">香橙派迁移系统到新的SD卡</a><time datetime="2023-02-26T17:20:22.000Z" title="发表于 2023-02-26 17:20:22">2023-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3687fa6b/" title="教你1秒使用ChatGPT中文版无需账号"><img src="https://media.canheting.cn/img/bg4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="教你1秒使用ChatGPT中文版无需账号"/></a><div class="content"><a class="title" href="/posts/3687fa6b/" title="教你1秒使用ChatGPT中文版无需账号">教你1秒使用ChatGPT中文版无需账号</a><time datetime="2023-02-19T15:57:26.000Z" title="发表于 2023-02-19 15:57:26">2023-02-19</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2020 - 2026 By canhetingsky</span></div><div class="footer_custom_text"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral">本网站由<img class="icp-icon" src="https://media.canheting.cn/img/upyun.png">提供CDN加速/云存储服务</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://beian.miit.gov.cn/"><img class="icp-icon" src="https://media.canheting.cn/img/icp.svg">京ICP备2022012118号</a><a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011502005665"><img class="icp-icon" src="https://media.canheting.cn/img/police.svg">京公网安备11011502005665号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://waline.canheting.cn/',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.8.0/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client@3.8.0/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
